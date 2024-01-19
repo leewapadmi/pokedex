@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Pokemon : Equatable {
+    let name: String
+}
+

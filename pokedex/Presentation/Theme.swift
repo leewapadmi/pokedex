@@ -6,3 +6,7 @@
 //
 
 import Foundation
+import UIKit
+
+let primaryColor = UIColor(hex: "#DC0A2D")
+let onPrimaryColor = UIColor(hex: "#FFFFFF")
