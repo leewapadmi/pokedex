@@ -9,13 +9,13 @@ import UIKit
 import Combine
 import Resolver
 
-class PokemonListViewController: UIViewController {
+class PokemonListViewController: UIViewController, Storyboarded {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
+    var viewModel: PokemonListViewModel!
     private var cancellables: Set<AnyCancellable> = []
-    private var viewModel: PokemonListViewModel!
     private var pokemon: [Pokemon] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,7 +27,8 @@ class PokemonListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        viewModel.fetchData()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        viewModel?.fetchData()
         subscribeObservers()
     }
     
