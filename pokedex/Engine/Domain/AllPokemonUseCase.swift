@@ -13,18 +13,36 @@ enum AllPokemonError : Error {
 }
 
 protocol AllPokemonUseCase {
-//    func getAllPokemon() -> AnyPublisher<[Pokemon], AllPokemonError>
+    func getAllPokemon() -> AnyPublisher<[Pokemon], AllPokemonError>
 }
 
 class AllPokemonUseCaseImpl : AllPokemonUseCase {
-//    func getAllPokemon() -> AnyPublisher<[Pokemon], AllPokemonError> {
-//        return Fail(error: .networkError)
-//    }
-    
     
     private let pokemonApi: PokemonApi
+    private var cachedPokemon: [Pokemon] = []
     
     init(pokemonApi: PokemonApi) {
         self.pokemonApi = pokemonApi
+    }
+    
+    func getAllPokemon() -> AnyPublisher<[Pokemon], AllPokemonError> {
+        return pokemonApi.getAllPokemon()
+            .map { response in
+                let pokemon = self.extractPokemonFromResponse(response: response)
+                if !pokemon.isEmpty {
+                    self.cachedPokemon = pokemon
+                }
+                return pokemon
+            }
+            .mapError { err in .networkError }
+            .eraseToAnyPublisher()
+    }
+    
+    private func extractPokemonFromResponse(
+        response: ListAllPokemonResponse
+    ) -> [Pokemon] {
+        return response.results.map { dto in
+            Pokemon(number: 1, url: dto.url, imageUrl: "", name: dto.name)
+        }
     }
 }

@@ -125,7 +125,6 @@
 		90BAADED2B4409E500488D32 /* pokedex */ = {
 			isa = PBXGroup;
 			children = (
-				90BAAE0B2B44422C00488D32 /* Model */,
 				90BAAE082B443F5C00488D32 /* Engine */,
 				90BAAE032B44231100488D32 /* Utils */,
 				90BAAE022B44219700488D32 /* Presentation */,
@@ -162,6 +161,7 @@
 		90BAAE082B443F5C00488D32 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				90BAAE0B2B44422C00488D32 /* Model */,
 				900DF7F32B5ED53F00F42BA4 /* Comms */,
 				900DF7F02B5ED46600F42BA4 /* Domain */,
 				900DF7EF2B5ED45500F42BA4 /* API */,
