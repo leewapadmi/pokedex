@@ -8,41 +8,40 @@
 import Foundation
 import Combine
 
-enum AllPokemonError : Error {
-    case networkError
-}
-
 protocol AllPokemonUseCase {
-    func getAllPokemon() -> AnyPublisher<[Pokemon], AllPokemonError>
+    func getAllPokemon() -> AnyPublisher<[PokemonDetails], Error>
 }
 
 class AllPokemonUseCaseImpl : AllPokemonUseCase {
     
     private let pokemonApi: PokemonApi
-    private var cachedPokemon: [Pokemon] = []
     
     init(pokemonApi: PokemonApi) {
         self.pokemonApi = pokemonApi
     }
     
-    func getAllPokemon() -> AnyPublisher<[Pokemon], AllPokemonError> {
+    func getAllPokemon() -> AnyPublisher<[PokemonDetails], Error> {
         return pokemonApi.getAllPokemon()
-            .map { response in
-                let pokemon = self.extractPokemonFromResponse(response: response)
-                if !pokemon.isEmpty {
-                    self.cachedPokemon = pokemon
-                }
-                return pokemon
+            .flatMap { listAllResponse in
+                let ids = listAllResponse.results.enumerated()
+                    .map { (index, item) in "\(index + 1)" }
+                return self.getPokemonDetailsList(for: ids)
             }
-            .mapError { err in .networkError }
             .eraseToAnyPublisher()
     }
     
-    private func extractPokemonFromResponse(
-        response: ListAllPokemonResponse
-    ) -> [Pokemon] {
-        return response.results.map { dto in
-            Pokemon(number: 1, url: dto.url, imageUrl: "", name: dto.name)
-        }
+    private func getPokemonDetailsList(
+        for ids: [String]
+    ) -> AnyPublisher<[PokemonDetails], Error> {
+        return Publishers.MergeMany(
+            ids.map { id in getPokemonDetail(with: id) }
+        ).collect().eraseToAnyPublisher()
+    }
+    
+    private func getPokemonDetail(
+        with id: String
+    ) -> AnyPublisher<PokemonDetails, Error> {
+        return pokemonApi.getPokemon(with: id)
+            .eraseToAnyPublisher()
     }
 }

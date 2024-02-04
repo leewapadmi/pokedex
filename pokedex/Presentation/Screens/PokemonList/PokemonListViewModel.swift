@@ -10,7 +10,7 @@ import Combine
 
 enum PokemonListState {
     case loading
-    case success(_ pokemons: [Pokemon])
+    case success(_ pokemons: [PokemonDetails])
     case loadError
 }
 

@@ -10,6 +10,7 @@ import Combine
 
 protocol PokemonApi {
     func getAllPokemon() -> AnyPublisher<ListAllPokemonResponse, Error>
+    func getPokemon(with id: String) -> AnyPublisher<PokemonDetails, Error>
 }
 
 class PokemonApiImpl : BaseApi, PokemonApi {
@@ -17,5 +18,11 @@ class PokemonApiImpl : BaseApi, PokemonApi {
         let params = ["limit": "151"]
         let req = JSONRequest(route: Route.getAllPokemon, params: params)
         return session.request(ListAllPokemonResponse.self, req)
+    }
+    
+    func getPokemon(with id: String) -> AnyPublisher<PokemonDetails, Error> {
+        print("getting pokemon with id: \(id)")
+        let req = JSONRequest(route: Route.getPokemonDetails(id: id))
+        return session.request(PokemonDetails.self, req)
     }
 }

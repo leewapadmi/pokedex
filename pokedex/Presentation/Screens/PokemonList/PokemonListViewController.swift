@@ -7,35 +7,41 @@
 
 import UIKit
 import Combine
-import Resolver
 
-class PokemonListViewController: UIViewController, Storyboarded {
+class PokemonListViewController: UIViewController, Storyboarded, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
     var viewModel: PokemonListViewModel!
     private var cancellables: Set<AnyCancellable> = []
-    private var pokemon: [Pokemon] = []
+    private var pokemonDataSource: [PokemonDetails] = []
     
     override func viewWillAppear(_ animated: Bool) {
         self.view.backgroundColor = primaryColor
         loadingSpinner.color = onPrimaryColor
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        viewModel?.fetchData()
-        subscribeObservers()
-    }
-    
-    private func subscribeObservers() {
+        configureCollectionView()
+        
         viewModel.state.sinkMain { [weak self] state in
             self?.handleState(state: state)
         }.store(in: &cancellables)
+        
+        viewModel.fetchData()
+    }
+    
+    private func configureCollectionView() {
+        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        flow.minimumInteritemSpacing = 50
+        
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.reloadData()
     }
     
     private func handleState(state: PokemonListState) {
@@ -49,40 +55,52 @@ class PokemonListViewController: UIViewController, Storyboarded {
         }
     }
     
-    private func showSuccessState(pokemon: [Pokemon]) {
-        self.pokemon = pokemon
-        tableView.reloadData()
-        tableView.isHidden = false
+    private func showSuccessState(pokemon: [PokemonDetails]) {
+        self.pokemonDataSource = pokemon
         loadingSpinner.isHidden = true
+        collectionView.reloadData()
     }
     
     private func showLoading() {
-        tableView.isHidden = true
         loadingSpinner.isHidden = false
         loadingSpinner.startAnimating()
     }
-}
-
-extension PokemonListViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("you tapped me")
-    }
-}
-
-extension PokemonListViewController : UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemon.count
-    }
     
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "cell",
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        pokemonDataSource.count
+    }
+
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let pokemonListCell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "PokemonListCell",
             for: indexPath
-        )
-        cell.textLabel?.text = pokemon[indexPath.row].name
-        return cell
+        ) as! PokemonListCollectionViewCell
+        
+        pokemonListCell.bind(with: pokemonDataSource[indexPath.row])
+        return pokemonListCell
+    }
+}
+
+extension PokemonListViewController : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let numberofItem: CGFloat = 3
+        let collectionViewWidth = self.collectionView.bounds.width
+        let extraSpace = (numberofItem - 1) * flowLayout.minimumInteritemSpacing
+        let inset = flowLayout.sectionInset.right + flowLayout.sectionInset.left
+        let width = Int((collectionViewWidth - extraSpace - inset) / numberofItem)
+        return CGSize(width: width, height: width)
     }
 }

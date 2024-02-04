@@ -15,6 +15,7 @@ class JSONRequest: BaseRequestImpl, Request {
                 let decoded = try JsonDecoder.decode(type.self, from: data)
                 promise(.success(decoded))
             } catch {
+                print(error)
                 promise(.failure(RequestError.parseError))
             }
         }
