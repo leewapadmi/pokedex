@@ -14,6 +14,7 @@
 		900DF7FB2B5ED97900F42BA4 /* BaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF7FA2B5ED97900F42BA4 /* BaseApi.swift */; };
 		900DF7FD2B5ED9A100F42BA4 /* CommsSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF7FC2B5ED9A100F42BA4 /* CommsSession.swift */; };
 		9018492E2B6FBA5B00AA1A7D /* PokemonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9018492D2B6FBA5B00AA1A7D /* PokemonDetails.swift */; };
+		901849342B70554700AA1A7D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 901849332B70554700AA1A7D /* Kingfisher */; };
 		905C88B92B5ACFE500C61897 /* CombineUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C88B82B5ACFE500C61897 /* CombineUtils.swift */; };
 		905C88BB2B5AD99300C61897 /* AllPokemonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905C88BA2B5AD99300C61897 /* AllPokemonUseCase.swift */; };
 		90BAADEF2B4409E500488D32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BAADEE2B4409E500488D32 /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901849342B70554700AA1A7D /* Kingfisher in Frameworks */,
 				90C534B72B5EF32D005CCA30 /* Resolver-Dynamic in Frameworks */,
 				90C534B92B5EF32D005CCA30 /* Resolver-Static in Frameworks */,
 				90C534B52B5EF32D005CCA30 /* Resolver in Frameworks */,
@@ -230,6 +232,7 @@
 				90C534B42B5EF32D005CCA30 /* Resolver */,
 				90C534B62B5EF32D005CCA30 /* Resolver-Dynamic */,
 				90C534B82B5EF32D005CCA30 /* Resolver-Static */,
+				901849332B70554700AA1A7D /* Kingfisher */,
 			);
 			productName = pokedex;
 			productReference = 90BAADEB2B4409E500488D32 /* pokedex.app */;
@@ -261,6 +264,7 @@
 			mainGroup = 90BAADE22B4409E500488D32;
 			packageReferences = (
 				90C534B32B5EF32D005CCA30 /* XCRemoteSwiftPackageReference "Resolver" */,
+				901849322B70554700AA1A7D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 90BAADEC2B4409E500488D32 /* Products */;
 			projectDirPath = "";
@@ -530,6 +534,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		901849322B70554700AA1A7D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.2;
+			};
+		};
 		90C534B32B5EF32D005CCA30 /* XCRemoteSwiftPackageReference "Resolver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Resolver.git";
@@ -541,6 +553,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		901849332B70554700AA1A7D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 901849322B70554700AA1A7D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		90C534B42B5EF32D005CCA30 /* Resolver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 90C534B32B5EF32D005CCA30 /* XCRemoteSwiftPackageReference "Resolver" */;
