@@ -35,9 +35,9 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     
     private func configureCollectionView() {
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        flow.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        flow.minimumInteritemSpacing = 50
-        
+        flow.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
+        flow.minimumInteritemSpacing = 8
+        flow.minimumLineSpacing = 8
         
         collectionView.dataSource = self
         collectionView.delegate = self

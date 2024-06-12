@@ -38,7 +38,10 @@ final class PokemonListViewModel {
                     self?._state.send(.loadError)
                 }
             } receiveValue: { [weak self] pokemon in
-                self?._state.send(.success(pokemon))
+                let sortedById = pokemon.sorted { details1, details2 in
+                    details1.id < details2.id
+                }
+                self?._state.send(.success(sortedById))
             }.store(in: &cancellables)
     }
 }

@@ -10,3 +10,5 @@ import UIKit
 
 let primaryColor = UIColor(hex: "#DC0A2D")
 let onPrimaryColor = UIColor(hex: "#FFFFFF")
+let greyText = UIColor(hex: "#666666")
+let greyBackground = UIColor(hex: "#EFEFEF")

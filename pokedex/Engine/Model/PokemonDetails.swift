@@ -49,4 +49,17 @@ struct AbilityDetails : Decodable {
 
 struct PokemonDetailsSprites : Decodable {
     let front_default: String
+    let other: OtherSprites
+}
+
+struct OtherSprites : Decodable {
+    let official_artwork: OfficialArtwork
+    
+    enum CodingKeys: String, CodingKey {
+        case official_artwork = "official-artwork"
+    }
+}
+
+struct OfficialArtwork : Decodable {
+    let front_default: String
 }

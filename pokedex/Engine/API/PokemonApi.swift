@@ -21,8 +21,8 @@ class PokemonApiImpl : BaseApi, PokemonApi {
     }
     
     func getPokemon(with id: String) -> AnyPublisher<PokemonDetails, Error> {
-        print("getting pokemon with id: \(id)")
         let req = JSONRequest(route: Route.getPokemonDetails(id: id))
-        return session.request(PokemonDetails.self, req)
+        let res = session.request(PokemonDetails.self, req)
+        return res
     }
 }
