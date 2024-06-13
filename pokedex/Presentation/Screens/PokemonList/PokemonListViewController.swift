@@ -10,6 +10,7 @@ import Combine
 
 class PokemonListViewController: UIViewController, Storyboarded, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var topRowView: UIStackView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
@@ -25,11 +26,9 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        
         viewModel.state.sinkMain { [weak self] state in
             self?.handleState(state: state)
         }.store(in: &cancellables)
-        
         viewModel.fetchData()
     }
     
