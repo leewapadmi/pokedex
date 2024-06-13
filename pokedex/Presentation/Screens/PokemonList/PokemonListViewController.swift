@@ -34,8 +34,9 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     }
     
     private func configureCollectionView() {
+        collectionView.layer.cornerRadius = 16
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        flow.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
+        flow.sectionInset = UIEdgeInsets(top: 24, left: 8, bottom: 24, right: 8)
         flow.minimumInteritemSpacing = 8
         flow.minimumLineSpacing = 8
         
@@ -57,11 +58,14 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     
     private func showSuccessState(pokemon: [PokemonDetails]) {
         self.pokemonDataSource = pokemon
+        loadingSpinner.stopAnimating()
         loadingSpinner.isHidden = true
+        collectionView.isHidden = false
         collectionView.reloadData()
     }
     
     private func showLoading() {
+        collectionView.isHidden = true
         loadingSpinner.isHidden = false
         loadingSpinner.startAnimating()
     }

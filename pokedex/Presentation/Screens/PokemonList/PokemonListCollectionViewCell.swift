@@ -9,11 +9,6 @@ import UIKit
 import Kingfisher
 
 class PokemonListCollectionViewCell: UICollectionViewCell {
-    
-//    @IBOutlet weak var idLabel: UILabel!
-//    @IBOutlet weak var imageView: UIImageView!
-//    @IBOutlet weak var cardSurfaceView: UIView!
-//    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -22,8 +17,6 @@ class PokemonListCollectionViewCell: UICollectionViewCell {
     
     func bind(with pokemon: PokemonDetails) {
         contentView.layer.cornerRadius = 8
-        //contentView.layer.borderWidth = 0.5
-        //contentView.layer.borderColor = UIColor.clear.cgColor
         contentView.layer.masksToBounds = true
         
         layer.shadowColor = UIColor.black.cgColor

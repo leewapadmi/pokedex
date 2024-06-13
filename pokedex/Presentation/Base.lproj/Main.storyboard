@@ -23,12 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="s2Z-DC-rXs">
-                                <rect key="frame" x="0.0" y="46" width="393" height="759"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokédex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSk-Ee-NiM">
+                                <rect key="frame" x="16" y="59" width="377" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-O7-VxU">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="8" y="88" width="377" height="730"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9um-oa-4qi">
                                     <size key="itemSize" width="256" height="221"/>
@@ -38,7 +40,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokemonListCell" id="k4y-7h-K3x" customClass="PokemonListCollectionViewCell" customModule="pokedex" customModuleProvider="target">
-                                        <rect key="frame" x="68.666666666666671" y="0.0" width="256" height="221"/>
+                                        <rect key="frame" x="60.666666666666664" y="0.0" width="256" height="221"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="34v-R8-0zw">
                                             <rect key="frame" x="0.0" y="0.0" width="256" height="221"/>
@@ -103,14 +105,22 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="s2Z-DC-rXs">
+                                <rect key="frame" x="0.0" y="46" width="393" height="759"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="W56-vf-hdf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FtS-O7-VxU" firstAttribute="top" secondItem="W56-vf-hdf" secondAttribute="top" id="Keb-AB-Kxx"/>
-                            <constraint firstItem="W56-vf-hdf" firstAttribute="bottom" secondItem="FtS-O7-VxU" secondAttribute="bottom" id="VOd-W7-5Fe"/>
-                            <constraint firstItem="FtS-O7-VxU" firstAttribute="leading" secondItem="W56-vf-hdf" secondAttribute="leading" id="n5u-dd-agc"/>
-                            <constraint firstItem="W56-vf-hdf" firstAttribute="trailing" secondItem="FtS-O7-VxU" secondAttribute="trailing" id="sXE-0b-AvG"/>
+                            <constraint firstItem="pSk-Ee-NiM" firstAttribute="leading" secondItem="W56-vf-hdf" secondAttribute="leading" constant="16" id="4HG-xS-78R"/>
+                            <constraint firstItem="W56-vf-hdf" firstAttribute="trailing" secondItem="FtS-O7-VxU" secondAttribute="trailing" constant="8" id="AdO-aK-4GQ"/>
+                            <constraint firstItem="FtS-O7-VxU" firstAttribute="bottom" secondItem="W56-vf-hdf" secondAttribute="bottom" id="Hq1-7g-21D"/>
+                            <constraint firstItem="W56-vf-hdf" firstAttribute="top" secondItem="pSk-Ee-NiM" secondAttribute="top" id="VOd-W7-5Fe"/>
+                            <constraint firstItem="pSk-Ee-NiM" firstAttribute="top" secondItem="W56-vf-hdf" secondAttribute="top" id="hnC-8r-88x"/>
+                            <constraint firstItem="FtS-O7-VxU" firstAttribute="leading" secondItem="W56-vf-hdf" secondAttribute="leading" constant="8" id="hrH-1I-V7d"/>
+                            <constraint firstItem="FtS-O7-VxU" firstAttribute="top" secondItem="pSk-Ee-NiM" secondAttribute="bottom" id="rTx-p2-Fr7"/>
+                            <constraint firstAttribute="trailing" secondItem="pSk-Ee-NiM" secondAttribute="trailing" id="tIU-Og-92V"/>
                         </constraints>
                     </view>
                     <connections>
@@ -128,7 +138,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
