@@ -14,6 +14,11 @@ enum PokemonListState {
     case loadError
 }
 
+enum SortByOption {
+    case number
+    case name
+}
+
 final class PokemonListViewModel {
     
     private let allPokemonUseCase: AllPokemonUseCase
@@ -22,11 +27,13 @@ final class PokemonListViewModel {
         self.allPokemonUseCase = allPokemonUseCase
     }
     
+    private var sortByOption: SortByOption = .number
     private var _state = CurrentValueSubject<PokemonListState, Never>(.loading)
-    lazy var state: AnyPublisher<PokemonListState, Never> = _state.eraseToAnyPublisher()
-    
+    private var pokemon: [PokemonDetails] = []
     private var cancellables: [AnyCancellable] = []
     
+    lazy var state: AnyPublisher<PokemonListState, Never> = _state.eraseToAnyPublisher()
+
     func fetchData() {
         if case PokemonListState.success(_) = _state.value {
             return
@@ -34,14 +41,41 @@ final class PokemonListViewModel {
         
         allPokemonUseCase.getAllPokemon()
             .sinkMain { [weak self] completion in
-                if case let .failure(error) = completion {
+                if case .failure(_) = completion {
                     self?._state.send(.loadError)
                 }
             } receiveValue: { [weak self] pokemon in
-                let sortedById = pokemon.sorted { details1, details2 in
-                    details1.id < details2.id
-                }
-                self?._state.send(.success(sortedById))
+                self?.pokemon = pokemon
+                self?.sortAndEmit(items: pokemon)
             }.store(in: &cancellables)
+    }
+    
+    func sortAndEmit(items: [PokemonDetails]) {
+        var results: [PokemonDetails] = []
+        switch (sortByOption) {
+        case .name:
+            results = items.sorted { $0.name < $1.name }
+        case .number:
+            results = items.sorted { $0.id < $1.id }
+        }
+        _state.send(.success(results))
+    }
+    
+    func filterResults(searchTerm: String) {
+        if (searchTerm.isEmpty) {
+            sortAndEmit(items: pokemon)
+            return
+        }
+        
+        let filteredItems = pokemon.filter { item in
+            item.name.lowercased()
+                .contains(searchTerm.lowercased())
+        }
+        sortAndEmit(items: filteredItems)
+    }
+    
+    func changeSortByOption(option: SortByOption) {
+        sortByOption = option
+        sortAndEmit(items: pokemon)
     }
 }

@@ -12,6 +12,7 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     
     @IBOutlet weak var topRowView: UIStackView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
     var viewModel: PokemonListViewModel!
@@ -26,10 +27,21 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureSearchField()
         viewModel.state.sinkMain { [weak self] state in
             self?.handleState(state: state)
         }.store(in: &cancellables)
         viewModel.fetchData()
+    }
+    
+    private func configureSearchField() {
+        searchField.layer.cornerRadius = 16
+    }
+    
+    @IBAction func editingDidChange(_ sender: UITextField) {
+        if let searchTerm = sender.text {
+            viewModel.filterResults(searchTerm: searchTerm)
+        }
     }
     
     private func configureCollectionView() {
