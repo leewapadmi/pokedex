@@ -30,6 +30,7 @@ final class PokemonListViewModel {
     private var sortByOption: SortByOption = .number
     private var _state = CurrentValueSubject<PokemonListState, Never>(.loading)
     private var pokemon: [PokemonDetails] = []
+    private var mostRecentSortedResults: [PokemonDetails] = []
     private var cancellables: [AnyCancellable] = []
     
     lazy var state: AnyPublisher<PokemonListState, Never> = _state.eraseToAnyPublisher()
@@ -58,6 +59,7 @@ final class PokemonListViewModel {
         case .number:
             results = items.sorted { $0.id < $1.id }
         }
+        mostRecentSortedResults = results
         _state.send(.success(results))
     }
     
@@ -77,5 +79,9 @@ final class PokemonListViewModel {
     func changeSortByOption(option: SortByOption) {
         sortByOption = option
         sortAndEmit(items: pokemon)
+    }
+    
+    func getPokemonDetails(at index: Int) -> PokemonDetails {
+        return mostRecentSortedResults[index]
     }
 }

@@ -52,8 +52,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
-                                                    <action selector="editingDidChange:" destination="Fty-mJ-8rR" eventType="editingChanged" id="ukG-xO-1XF"/>
-                                                    <action selector="searchFieldEditingChanged:" destination="Fty-mJ-8rR" eventType="editingDidEnd" id="VcM-KU-Sa6"/>
+                                                    <action selector="editingDidChange:" destination="Fty-mJ-8rR" eventType="editingChanged" id="huO-bw-q5x"/>
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIX-7V-SXf">
@@ -161,13 +160,27 @@
                     <connections>
                         <outlet property="collectionView" destination="FtS-O7-VxU" id="YvE-KJ-ZtP"/>
                         <outlet property="loadingSpinner" destination="s2Z-DC-rXs" id="Q53-35-mew"/>
-                        <outlet property="searchField" destination="Vsx-Bf-aqs" id="KqV-w2-MbO"/>
                         <outlet property="topRowView" destination="L4m-2c-k5e" id="TLC-Lz-ykJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dba-TJ-5I0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-11.450381679389313" y="-104.22535211267606"/>
+            <point key="canvasLocation" x="-868" y="-782"/>
+        </scene>
+        <!--Pokemon Detail View Controller-->
+        <scene sceneID="x7w-gq-R0I">
+            <objects>
+                <viewController storyboardIdentifier="PokemonDetailViewController" id="4WF-KJ-Ymv" customClass="PokemonDetailViewController" customModule="pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6qA-bl-23k">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="37R-Ug-31i"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XUK-n6-Swv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-37" y="-781"/>
         </scene>
     </scenes>
     <resources>

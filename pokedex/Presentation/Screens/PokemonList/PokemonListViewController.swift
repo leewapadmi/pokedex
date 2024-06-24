@@ -12,10 +12,10 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     
     @IBOutlet weak var topRowView: UIStackView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
     
     var viewModel: PokemonListViewModel!
+    var coordinator: MainCoordinator!
     private var cancellables: Set<AnyCancellable> = []
     private var pokemonDataSource: [PokemonDetails] = []
     
@@ -48,11 +48,7 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
         viewModel.fetchData()
     }
     
-    @IBAction func editingDidChange(_ sender: UITextField) {
-        if let searchTerm = sender.text {
-            viewModel.filterResults(searchTerm: searchTerm)
-        }
-    }
+    
     
     private func configureCollectionView() {
         collectionView.layer.cornerRadius = 16
@@ -98,6 +94,11 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
         pokemonDataSource.count
     }
 
+    @IBAction func editingDidChange(_ sender: UITextField) {
+        if let searchTerm = sender.text {
+            viewModel.filterResults(searchTerm: searchTerm)
+        }
+    }
     
     func collectionView(
         _ collectionView: UICollectionView,
@@ -127,5 +128,10 @@ extension PokemonListViewController : UICollectionViewDelegateFlowLayout {
         let inset = flowLayout.sectionInset.right + flowLayout.sectionInset.left
         let width = Int((collectionViewWidth - extraSpace - inset) / numRows)
         return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pokemonDetail = viewModel.getPokemonDetails(at: indexPath[1])
+        coordinator.showPokemonDetail(forPokemon: pokemonDetail.id)
     }
 }

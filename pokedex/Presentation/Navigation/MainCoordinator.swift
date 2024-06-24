@@ -21,9 +21,20 @@ class MainCoordinator : Coordinator {
     func start() {
         let viewController = PokemonListViewController.instantiate()
         viewController.viewModel = PokemonListViewModel(allPokemonUseCase: Resolver.resolve())
+        viewController.coordinator = self
         navigationController.pushViewController(
             viewController,
             animated: false
+        )
+    }
+    
+    func showPokemonDetail(forPokemon id: Int) {
+        let viewController = PokemonDetailViewController.instantiate()
+        viewController.pokemonId = id
+        viewController.coordinator = self
+        navigationController.pushViewController(
+            viewController,
+            animated: true
         )
     }
 }
