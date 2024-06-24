@@ -78,6 +78,21 @@
                   endingLineNumber = "19"
                   offsetFromSymbolStart = "917">
                </Location>
+               <Location
+                  uuid = "D20701D7-0E3D-47EE-833A-AA4C7B207A91 - a9f743582b862673"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;&#x3c4;_0_0, Swift.Error&gt;) -&gt; ()) -&gt; () in pokedex.JSONRequest.decodeResponse&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(_: &#x3c4;_0_0.Type, from: Foundation.Data) -&gt; Combine.AnyPublisher&lt;&#x3c4;_0_0, Swift.Error&gt;"
+                  moduleName = "pokedex"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leew/Development/iOS/pokedex/pokedex/Engine/Comms/JsonRequest.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "952">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

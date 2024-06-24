@@ -27,15 +27,10 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureSearchField()
         viewModel.state.sinkMain { [weak self] state in
             self?.handleState(state: state)
         }.store(in: &cancellables)
         viewModel.fetchData()
-    }
-    
-    private func configureSearchField() {
-        searchField.layer.cornerRadius = 16
     }
     
     @IBAction func editingDidChange(_ sender: UITextField) {

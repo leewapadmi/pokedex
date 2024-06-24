@@ -1,0 +1,13 @@
+# Mockfile is a SwiftyMocky YAML configuration file
+sourceryCommand: null
+unit.tests.mock:    # Name of your mock
+  sources:
+    include:        # All swift files here would be scanned for AutoMockable types
+        - ./pokedex
+    exclude: []     # You can exclude files as well
+  output:           # Generated mock file location and name
+    ./pokedexTests/Mocks/Mock.generated.swift
+  targets:          # Specify XCodeproj targets for your mock. Used for linting
+    - pokedexTests
+  testable: [pokedex]      # Specify  list of imported/@testable modules referenced in mock
+  import: [XCTest, Combine, Foundation]        # You can use 'swiftymocky autoimport' to update it automatically

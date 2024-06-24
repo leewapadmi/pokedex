@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum PokemonListState {
+enum PokemonListState : Equatable {
     case loading
     case success(_ pokemons: [PokemonDetails])
     case loadError
@@ -50,7 +50,7 @@ final class PokemonListViewModel {
             }.store(in: &cancellables)
     }
     
-    func sortAndEmit(items: [PokemonDetails]) {
+    private func sortAndEmit(items: [PokemonDetails]) {
         var results: [PokemonDetails] = []
         switch (sortByOption) {
         case .name:

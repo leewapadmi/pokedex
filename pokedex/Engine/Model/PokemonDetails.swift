@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonDetails : Decodable {
+struct PokemonDetails : Decodable, Equatable {
     let name: String
     let id: Int
     let order: Int
@@ -21,38 +21,38 @@ struct PokemonDetails : Decodable {
     let sprites: PokemonDetailsSprites
 }
 
-struct PokemonForm : Decodable {
+struct PokemonForm : Decodable, Equatable {
     let name: String
     let url: String
 }
 
-struct GameIndex : Decodable {
+struct GameIndex : Decodable, Equatable {
     let game_index: Int
     let version: GameIndexVersion
 }
 
-struct GameIndexVersion : Decodable {
+struct GameIndexVersion : Decodable, Equatable {
     let name: String
     let url: String
 }
 
-struct Ability : Decodable {
+struct Ability : Decodable, Equatable {
     let is_hidden: Bool
     let slot: Int
     let ability: AbilityDetails
 }
 
-struct AbilityDetails : Decodable {
+struct AbilityDetails : Decodable, Equatable {
     let name: String
     let url: String
 }
 
-struct PokemonDetailsSprites : Decodable {
+struct PokemonDetailsSprites : Decodable, Equatable {
     let front_default: String
     let other: OtherSprites
 }
 
-struct OtherSprites : Decodable {
+struct OtherSprites : Decodable, Equatable {
     let official_artwork: OfficialArtwork
     
     enum CodingKeys: String, CodingKey {
@@ -60,6 +60,6 @@ struct OtherSprites : Decodable {
     }
 }
 
-struct OfficialArtwork : Decodable {
+struct OfficialArtwork : Decodable, Equatable {
     let front_default: String
 }

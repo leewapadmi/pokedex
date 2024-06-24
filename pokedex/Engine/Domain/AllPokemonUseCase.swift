@@ -7,7 +7,9 @@
 
 import Foundation
 import Combine
+import SwiftyMocky
 
+//sourcery: AutoMockable
 protocol AllPokemonUseCase {
     func getAllPokemon() -> AnyPublisher<[PokemonDetails], Error>
 }
