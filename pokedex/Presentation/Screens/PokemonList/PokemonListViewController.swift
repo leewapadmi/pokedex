@@ -19,6 +19,21 @@ class PokemonListViewController: UIViewController, Storyboarded, UICollectionVie
     private var cancellables: Set<AnyCancellable> = []
     private var pokemonDataSource: [PokemonDetails] = []
     
+    @IBAction func didTapFilterButton(_ sender: UIButton) {
+        let alert = UIAlertController(
+            title: "Pick filter option",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        alert.addAction(UIAlertAction(title: "By name", style: .default, handler: { action in
+            self.viewModel.changeSortByOption(option: .name)
+        }))
+        alert.addAction(UIAlertAction(title: "By ID", style: .default, handler: { action in
+            self.viewModel.changeSortByOption(option: .number)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.view.backgroundColor = primaryColor
         loadingSpinner.color = onPrimaryColor
@@ -106,11 +121,11 @@ extension PokemonListViewController : UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        let numberofItem: CGFloat = 3
+        let numRows: CGFloat = 3
         let collectionViewWidth = self.collectionView.bounds.width
-        let extraSpace = (numberofItem - 1) * flowLayout.minimumInteritemSpacing
+        let extraSpace = (numRows - 1) * flowLayout.minimumInteritemSpacing
         let inset = flowLayout.sectionInset.right + flowLayout.sectionInset.left
-        let width = Int((collectionViewWidth - extraSpace - inset) / numberofItem)
+        let width = Int((collectionViewWidth - extraSpace - inset) / numRows)
         return CGSize(width: width, height: width)
     }
 }
