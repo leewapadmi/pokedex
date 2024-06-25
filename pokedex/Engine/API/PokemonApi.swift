@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+//sourcery: AutoMockable
 protocol PokemonApi {
     func getAllPokemon() -> AnyPublisher<ListAllPokemonResponse, Error>
     func getPokemon(with id: String) -> AnyPublisher<PokemonDetails, Error>

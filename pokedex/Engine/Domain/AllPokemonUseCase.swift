@@ -35,10 +35,8 @@ class AllPokemonUseCaseImpl : AllPokemonUseCase {
                 let artworkUrls = pokemonDetailsList.map {
                     $0.sprites.other.official_artwork.front_default
                 }
-                return self.imagePreloader.preloadImages(
-                    rawUrls: artworkUrls,
-                    withTimeout: 5.0
-                ).map { _ in pokemonDetailsList }
+                return self.imagePreloader.preloadImages(rawUrls: artworkUrls)
+                    .map { _ in pokemonDetailsList }
             }
             .eraseToAnyPublisher()
     }
