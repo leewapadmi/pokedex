@@ -43,6 +43,7 @@ final class PokemonListViewModel {
         allPokemonUseCase.getAllPokemon()
             .sinkMain { [weak self] completion in
                 if case .failure(_) = completion {
+                    print("we got an error!")
                     self?._state.send(.loadError)
                 }
             } receiveValue: { [weak self] pokemon in

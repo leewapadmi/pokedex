@@ -17,9 +17,11 @@ protocol AllPokemonUseCase {
 class AllPokemonUseCaseImpl : AllPokemonUseCase {
     
     private let pokemonApi: PokemonApi
+    private let imagePreloader: ImagePreloader
     
-    init(pokemonApi: PokemonApi) {
+    init(pokemonApi: PokemonApi, imagePreloader: ImagePreloader) {
         self.pokemonApi = pokemonApi
+        self.imagePreloader = imagePreloader
     }
     
     func getAllPokemon() -> AnyPublisher<[PokemonDetails], Error> {
@@ -28,6 +30,15 @@ class AllPokemonUseCaseImpl : AllPokemonUseCase {
                 let ids = listAllResponse.results.enumerated()
                     .map { (index, item) in "\(index + 1)" }
                 return self.getPokemonDetailsList(for: ids)
+            }
+            .flatMap { pokemonDetailsList in
+                let artworkUrls = pokemonDetailsList.map {
+                    $0.sprites.other.official_artwork.front_default
+                }
+                return self.imagePreloader.preloadImages(
+                    rawUrls: artworkUrls,
+                    withTimeout: 5.0
+                ).map { _ in pokemonDetailsList }
             }
             .eraseToAnyPublisher()
     }
