@@ -12,6 +12,7 @@ final class PokemonDetailViewController : UIViewController, Storyboarded {
     
     var pokemonId: Int!
     var coordinator: MainCoordinator!
+    var viewModel: PokemonDetailViewModel!
     
     override func viewDidLoad() {
         print("Entered new VC with id: \(pokemonId!)")

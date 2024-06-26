@@ -19,6 +19,27 @@ struct PokemonDetails : Decodable, Equatable {
     let forms: [PokemonForm]
     let game_indices: [GameIndex]
     let sprites: PokemonDetailsSprites
+    let types: [PokemonType]
+    let stats: [PokemonBaseStat]
+}
+
+struct PokemonBaseStat : Decodable, Equatable {
+    let base_stat: Int
+    let effort: Int
+    let stat: PokemonBaseStatInfo
+}
+
+struct PokemonBaseStatInfo : Decodable, Equatable {
+    let name: String
+}
+
+struct PokemonType : Decodable, Equatable {
+    let slot: Int
+    let type: PokemonTypeInfo
+}
+
+struct PokemonTypeInfo : Decodable, Equatable {
+    let name: String
 }
 
 struct PokemonForm : Decodable, Equatable {
@@ -53,10 +74,10 @@ struct PokemonDetailsSprites : Decodable, Equatable {
 }
 
 struct OtherSprites : Decodable, Equatable {
-    let official_artwork: OfficialArtwork
+    let officialArtwork: OfficialArtwork
     
     enum CodingKeys: String, CodingKey {
-        case official_artwork = "official-artwork"
+        case officialArtwork = "official-artwork"
     }
 }
 

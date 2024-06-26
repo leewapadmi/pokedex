@@ -10,7 +10,27 @@ import Foundation
 
 extension PokemonDetails {
     static let mock = PokemonDetails(
-        name: "Pikachu", id: 1, order: 1, weight: 1, height: 2, is_default: true, base_experience: 23, abilities: [], forms: [], game_indices: [], sprites: PokemonDetailsSprites(front_default: "", other: OtherSprites(official_artwork: OfficialArtwork(front_default: ""))))
+        name: "Pikachu", 
+        id: 1,
+        order: 1,
+        weight: 1,
+        height: 2,
+        is_default: true,
+        base_experience: 23,
+        abilities: [],
+        forms: [],
+        game_indices: [],
+        sprites: PokemonDetailsSprites(
+            front_default: "",
+            other: OtherSprites(
+                officialArtwork: OfficialArtwork(
+                    front_default: ""
+                )
+            )
+        ),
+        types: [],
+        stats: []
+    )
     
     static let mockList = [
         mock,

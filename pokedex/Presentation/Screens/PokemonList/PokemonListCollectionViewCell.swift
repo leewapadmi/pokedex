@@ -35,7 +35,7 @@ class PokemonListCollectionViewCell: UICollectionViewCell {
         nameLabel.text = pokemon.name.capitalized
         idLabel.text = getIdString(id: pokemon.id)
         idLabel.textColor = greyText
-        let imgUrl = URL(string: pokemon.sprites.other.official_artwork.front_default)
+        let imgUrl = URL(string: pokemon.sprites.other.officialArtwork.front_default)
         imageView.kf.setImage(with: imgUrl)
     }
     

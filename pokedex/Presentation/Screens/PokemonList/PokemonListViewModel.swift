@@ -28,11 +28,11 @@ final class PokemonListViewModel {
     }
     
     private var sortByOption: SortByOption = .number
-    private var _state = CurrentValueSubject<PokemonListState, Never>(.loading)
     private var pokemon: [PokemonDetails] = []
     private var mostRecentSortedResults: [PokemonDetails] = []
     private var cancellables: [AnyCancellable] = []
     
+    private var _state = CurrentValueSubject<PokemonListState, Never>(.loading)
     lazy var state: AnyPublisher<PokemonListState, Never> = _state.eraseToAnyPublisher()
 
     func fetchData() {
