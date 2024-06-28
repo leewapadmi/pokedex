@@ -14,9 +14,9 @@ enum PokemonDetailState : Equatable {
 
 final class PokemonDetailViewModel {
     
-    private let pokemonDetailUseCase: PokemonDetailUseCase!
+    private let pokemonDetailUseCase: PokemonDetailUseCase
     
-    init(pokemonDetailUseCase: PokemonDetailUseCase!) {
+    init(pokemonDetailUseCase: PokemonDetailUseCase) {
         self.pokemonDetailUseCase = pokemonDetailUseCase
     }
     
@@ -28,7 +28,6 @@ final class PokemonDetailViewModel {
         pokemonDetailUseCase.getPokemonDescription(id: id)
             .sinkMain { [weak self] completion in
                 if case .failure(_) = completion {
-                    print("we got an error!")
                     self?._state.send(.finishedLoading(description: nil))
                 }
             } receiveValue: { [weak self] description in

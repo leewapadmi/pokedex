@@ -32,7 +32,6 @@ class AllPokemonUseCaseImpl : AllPokemonUseCase {
                 return self.getPokemonDetailsList(for: ids)
             }
             .flatMap { pokemonDetailsList in
-                print(pokemonDetailsList)
                 let artworkUrls = pokemonDetailsList.map {
                     $0.sprites.other.officialArtwork.front_default
                 }

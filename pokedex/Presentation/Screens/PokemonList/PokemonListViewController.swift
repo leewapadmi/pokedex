@@ -132,6 +132,6 @@ extension PokemonListViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pokemonDetail = viewModel.getPokemonDetails(at: indexPath[1])
-        coordinator.showPokemonDetail(forPokemon: pokemonDetail.id)
+        coordinator.showPokemonDetail(forPokemon: pokemonDetail)
     }
 }

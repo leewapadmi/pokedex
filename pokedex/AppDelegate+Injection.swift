@@ -20,8 +20,10 @@ extension Resolver : ResolverRegistering {
         
         // register use cases
         register(AllPokemonUseCase.self) { AllPokemonUseCaseImpl(pokemonApi: resolve(), imagePreloader: resolve()) }
+        register(PokemonDetailUseCase.self) { PokemonDetailUseCaseImpl(pokemonApi: resolve()) }
         
         // register VMs
         register(PokemonListViewModel.self) { PokemonListViewModel(allPokemonUseCase: resolve()) }
+        register(PokemonDetailViewModel.self) { PokemonDetailViewModel(pokemonDetailUseCase: resolve()) }
     }
 }

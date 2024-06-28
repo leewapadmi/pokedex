@@ -33,14 +33,11 @@ class PokemonListCollectionViewCell: UICollectionViewCell {
         groundView.layer.cornerRadius = 8
         groundView.layer.backgroundColor = greyBackground.cgColor
         nameLabel.text = pokemon.name.capitalized
-        idLabel.text = getIdString(id: pokemon.id)
+        idLabel.text = pokemon.id.formatId()
         idLabel.textColor = greyText
         let imgUrl = URL(string: pokemon.sprites.other.officialArtwork.front_default)
         imageView.kf.setImage(with: imgUrl)
     }
-    
-    private func getIdString(id: Int) -> String {
-        let withLeading = String(format: "%03d", id)
-        return "#\(withLeading)"
-    }
 }
+
+

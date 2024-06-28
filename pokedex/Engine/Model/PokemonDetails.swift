@@ -19,8 +19,34 @@ struct PokemonDetails : Decodable, Equatable {
     let forms: [PokemonForm]
     let game_indices: [GameIndex]
     let sprites: PokemonDetailsSprites
-    let types: [PokemonType]
+    let types: [PokemonTypeInfo]
     let stats: [PokemonBaseStat]
+    
+    var weightInKilos: String {
+        let kilos = Float(floatLiteral: 0.1) * Float(weight)
+        return String(format: "%.1f", kilos)
+    }
+    
+    var heightInMeters: String {
+        let meters = Float(floatLiteral: 0.1) * Float(height)
+        return String(format: "%.1f", meters)
+    }
+    
+    var moves: [String] {
+        return abilities.map { ability in
+            ability.ability.name.localizedCapitalized
+        }
+    }
+    
+    var formattedStats: [String : String] {
+        var stats: [String : String] = [:]
+        self.stats.forEach { stat in
+            let value = stat.base_stat
+            let category = stat.stat.name
+            stats[category] = String(format: "%03d", value)
+        }
+        return stats
+    }
 }
 
 struct PokemonBaseStat : Decodable, Equatable {
@@ -33,13 +59,13 @@ struct PokemonBaseStatInfo : Decodable, Equatable {
     let name: String
 }
 
-struct PokemonType : Decodable, Equatable {
+struct PokemonTypeInfo : Decodable, Equatable {
     let slot: Int
-    let type: PokemonTypeInfo
+    let type: PokemonTypeDetails
 }
 
-struct PokemonTypeInfo : Decodable, Equatable {
-    let name: String
+struct PokemonTypeDetails : Decodable, Equatable {
+    let name: PokemonType
 }
 
 struct PokemonForm : Decodable, Equatable {

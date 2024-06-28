@@ -25,8 +25,18 @@ final class PokemonDetailUseCaseImpl : PokemonDetailUseCase {
             .map { species in
                 species.flavor_text_entries.first { entry in
                     entry.language.name == "en"
-                }?.flavor_text
+                }?.flavor_text.sanitiseForDisplay()
             }
             .eraseToAnyPublisher()
+    }
+}
+
+extension String {
+    func sanitiseForDisplay() -> String {
+        var value = self
+        value.replace("\n", with: " ")
+        value.replace("POKéMON", with: "pokémon")
+        value.replace("\u{0C}", with: " ")
+        return value
     }
 }

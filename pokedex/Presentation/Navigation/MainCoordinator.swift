@@ -28,10 +28,11 @@ class MainCoordinator : Coordinator {
         )
     }
     
-    func showPokemonDetail(forPokemon id: Int) {
+    func showPokemonDetail(forPokemon pokemon: PokemonDetails) {
         let viewController = PokemonDetailViewController.instantiate()
-        viewController.pokemonId = id
+        viewController.pokemon = pokemon
         viewController.coordinator = self
+        viewController.viewModel = PokemonDetailViewModel(pokemonDetailUseCase: Resolver.resolve())
         navigationController.pushViewController(
             viewController,
             animated: true
